@@ -66,7 +66,6 @@ def main():
                 text_to_speech_engine.say(f'{notification.symbol} Get Halted at {notification.halt_time}, Occurrence: {notification.occurrence} Times, Halt Reason: {reason}')
 
         refresh_time = time.time() - iteration_start_time
-        print(f'Refresh Time: {refresh_time}')
 
         if refresh_time >= default_iteration_time:
             continue
