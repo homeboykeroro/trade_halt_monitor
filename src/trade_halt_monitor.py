@@ -48,10 +48,6 @@ def main():
             trade_halt_record = TradeHaltRecord(symbol, company, reason, halt_date, halt_time, resumption_time)
 
             if (datetime.strptime(halt_date, parse_date_format).date() >= start_date and (trade_halt_record not in full_trade_halt_list)):
-                ticker_list.append(symbol)
-                ticker_to_max_occurrence_dict = Counter(ticker_list)
-                trade_halt_record.occurrence = ticker_to_max_occurrence_dict.get(symbol) + 1
-
                 full_trade_halt_list.append(trade_halt_record)
                 pending_notificatioin_list.append(trade_halt_record)
         
@@ -62,8 +58,9 @@ def main():
                 halt_record.display()
             
             for notification in pending_notificatioin_list:
-                reason = HaltReason(notification.reason) if (HaltReason.has_key(notification.reason)) else notification.reason
-                text_to_speech_engine.say(f'{notification.symbol} Get Halted at {notification.halt_time}, Occurrence: {notification.occurrence} Times, Halt Reason: {reason}')
+                reason = HaltReason[notification.reason].value if (HaltReason.has_key(notification.reason)) else notification.reason
+                text_to_speech_engine.say(f'{notification.symbol} Get Halted at {notification.halt_time}, Halt Reason: {reason}')
+                text_to_speech_engine.runAndWait()
 
         refresh_time = time.time() - iteration_start_time
 
@@ -72,7 +69,6 @@ def main():
         else:
             time.sleep(default_iteration_time - refresh_time)
 
-        text_to_speech_engine.runAndWait()
 
 main()
 

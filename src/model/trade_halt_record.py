@@ -1,5 +1,3 @@
-from colorama import Fore, Back
-
 from datetime import datetime
 
 from constant.halt_reason import HaltReason
@@ -18,11 +16,9 @@ class TradeHaltRecord:
         self.__symbol = symbol
         self.__company = company
         self.__reason = reason
-        self.__occurrence = 0
         self.__halt_date = halt_date
         self.__halt_time = halt_time
         self.__resumption_time = resumption_time
-        self.__is_highlighted = False
     
     def __members(self):
         return (self.__symbol, self.__company, self.__reason,
@@ -61,14 +57,6 @@ class TradeHaltRecord:
         self.__reason = reason
 
     @property
-    def occurrence(self):
-        return self.__occurrence
-    
-    @occurrence.setter
-    def occurrence(self, occurrence):
-        self.__occurrence = occurrence
-
-    @property
     def halt_date(self):
         return self.__halt_date
     
@@ -92,24 +80,10 @@ class TradeHaltRecord:
     def __resumption_time(self, __resumption_time):
         self.____resumption_time = __resumption_time
 
-    @property
-    def is_highlighted(self):
-        return self.__is_highlighted
-    
-    @is_highlighted.setter
-    def is_highlighted(self, is_highlighted):
-        self.__is_highlighted = is_highlighted
-
     def display(self):
         display_resumption_time = self.__resumption_time if self.__resumption_time != None else 'Unknown'
         display_halt_date = datetime.strptime(self.__halt_date, '%m/%d/%Y').strftime('%Y-%m-%d')
-        display_reason = HaltReason(self.__reason) if (HaltReason.has_key(self.__reason)) else self.__reason
-        highlight_style = Fore.YELLOW + Back.GREEN
-        normal_style = Fore.WHITE + Back.BLACK
-
-        if self.__is_highlighted:
-            display_msg = f'{highlight_style}{self.__company} {self.__symbol}, {display_reason}, Halt Date Time: {display_halt_date} {self.__halt_time}, Resume Trade at {display_resumption_time}'
-        else:
-            display_msg = f'{normal_style}{self.__company} {self.__symbol}, {display_reason}, Halt Date Time: {display_halt_date} {self.__halt_time}, Resume Trade at {display_resumption_time}'
+        display_reason = HaltReason[self.__reason].value if (HaltReason.has_key(self.__reason)) else self.__reason
+        display_msg = f'{self.__company} ({self.__symbol}), {display_reason}, Halt Date Time: {display_halt_date} {self.__halt_time}, Resume Trade at {display_resumption_time}'
 
         print(display_msg)
