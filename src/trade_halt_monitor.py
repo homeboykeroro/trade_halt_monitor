@@ -6,7 +6,6 @@ from datetime import datetime
 import requests
 import time
 import os
-from collections import Counter
 
 from model.trade_halt_record import TradeHaltRecord
 from constant.halt_reason import HaltReason
@@ -26,7 +25,6 @@ def main():
     text_to_speech_engine.setProperty('volume', 1)
 
     full_trade_halt_list = []
-    ticker_list = []
 
     while True:
         iteration_start_time = time.time()
