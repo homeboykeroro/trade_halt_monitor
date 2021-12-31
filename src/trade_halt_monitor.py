@@ -13,7 +13,6 @@ from constant.halt_reason import HaltReason
 def main():
     us_timezone = timezone('US/Eastern')
     parse_date_format = '%m/%d/%Y'
-    parse_time_format = '%H:%M:%S'
     default_iteration_time = 60
     start_date = datetime.now(us_timezone).date()
 
