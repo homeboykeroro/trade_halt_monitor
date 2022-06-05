@@ -12,4 +12,4 @@ HOW TO USE:
 
 FUNCTION:
 
-- Retrieve information about halted stocks, include ticker symbol and halt reason (volatility trade/ pending material news). Once program starts it keep monitoring for halted stocks every minute. Results are shown in form of voice notification and text shown in console.
+- Retrieve information about halted stocks, include ticker symbol and halt reason (volatility trade/ pending material news). Once program starts it keep monitoring for halted stocks every minute. Results are presented in form of voice notification and text message (display in console).
