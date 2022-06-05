@@ -1,8 +1,8 @@
 # trade_halt_monitor
 PROJECT SETUP:
 
-1. Run py -m venv VENV_NAME
-2. Run pip install -r requirements.txt
+1. Run `py -m venv VENV_NAME`
+2. Run `pip install -r requirements.txt`
 
 
 HOW TO USE:
